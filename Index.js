@@ -13,7 +13,16 @@ const Mongo_Url = process.env.MONGO_URL;
 const authRoute = require("./Router/AuthRouter");
 const GoalRouter = require("./Router/GoalRouter");
 
-//mongoDB connection
+require("dotenv").config();
+
+mongoose.connect(process.env.MONGO_URL)
+.then(() => {
+    console.log("MongoDB Connected");
+})
+.catch((err) => {
+    console.log("MongoDB Error:", err);
+});
+//mongoDB connections
 mongoose
   .connect(Mongo_Url)
   .then(() => console.log("MongoDB Connected"))
@@ -26,5 +35,21 @@ app.use("/", GoalRouter);
 app.use(errormiddleware);
 app.listen(PORT, () => {
   console.log("Server running on port 8000");
+const express = require("express");
+const mongoose = require("mongoose");
+require("dotenv").config();
 });
 
+/* STEP 5: ADD MongoDB connection HERE */
+mongoose.connect(process.env.MONGO_URL)
+.then(() => {
+  console.log("MongoDB Connected");
+})
+.catch((err) => {
+  console.log("MongoDB Error:",err);
+});
+
+/* Start server */
+app.listen(5000, () => {
+  console.log("Server running on port 5000");
+});
